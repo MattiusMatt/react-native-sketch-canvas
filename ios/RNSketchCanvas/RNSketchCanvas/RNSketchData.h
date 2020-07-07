@@ -21,6 +21,7 @@
 - (instancetype)initWithId:(int) pathId strokeColor:(UIColor*) strokeColor strokeWidth:(int) strokeWidth;
 
 - (CGRect)addPoint:(CGPoint) point;
+- (void)fillRect:(CGRect) rect InContext:(CGContextRef) context;
 
 - (void)drawLastPointInContext:(CGContextRef)context;
 - (void)drawInContext:(CGContextRef)context;

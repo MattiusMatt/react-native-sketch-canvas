@@ -267,6 +267,15 @@
     }
 }
 
+- (void)fillRectX: (float)x Y: (float)y Width: (float)width Height: (float)height {
+    CGRect fillRect = CGRectMake(x, y, width, height);
+
+    [_currentPath fillRect: fillRect InContext: _drawingContext];
+
+    [self setFrozenImageNeedsUpdate];
+    [self setNeedsDisplayInRect:fillRect];
+}
+
 - (void)addPointX: (float)x Y: (float)y {
     CGPoint newPoint = CGPointMake(x, y);
     CGRect updateRect = [_currentPath addPoint: newPoint];

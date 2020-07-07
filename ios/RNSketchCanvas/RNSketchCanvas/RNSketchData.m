@@ -107,6 +107,11 @@
     return updateRect;
 }
 
+- (void)fillRect:(CGRect) rect InContext:(CGContextRef) context {
+    CGContextSetFillColorWithColor(context, [_strokeColor CGColor]);
+    CGContextFillRect(context, rect);
+}
+
 - (void)drawLastPointInContext:(CGContextRef)context {
     NSUInteger pointsCount = _points.count;
     if (pointsCount < 1) {

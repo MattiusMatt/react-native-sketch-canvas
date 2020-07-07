@@ -65,6 +65,13 @@ RCT_EXPORT_METHOD(save:(nonnull NSNumber *)reactTag type:(NSString*) type folder
     }];
 }
 
+RCT_EXPORT_METHOD(fillRect:(nonnull NSNumber *)reactTag x: (float)x y: (float)y width: (float)width height: (float)height)
+{
+    [self runCanvas:reactTag block:^(RNSketchCanvas *canvas) {
+        [canvas fillRectX: x Y: y Width: width Height: height];
+    }];
+}
+
 RCT_EXPORT_METHOD(addPoint:(nonnull NSNumber *)reactTag x: (float)x y: (float)y)
 {
     [self runCanvas:reactTag block:^(RNSketchCanvas *canvas) {

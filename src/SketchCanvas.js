@@ -381,22 +381,17 @@ class SketchCanvas extends React.Component {
             ]
         );
 
-        for (let row = -1; row < height; row++) {
-            for (let col = -1; col < width; col++) {
-                UIManager.dispatchViewManagerCommand(
-                    this._handle,
-                    UIManager.RNSketchCanvas.Commands.addPoint,
-                    [
-                        parseFloat(
-                            (startX + col).toFixed(2) * this._screenScale
-                        ),
-                        parseFloat(
-                            (startY + row).toFixed(2) * this._screenScale
-                        ),
-                    ]
-                );
-            }
-        }
+        UIManager.dispatchViewManagerCommand(
+            this._handle,
+            UIManager.RNSketchCanvas.Commands.fillRect,
+            [
+                parseFloat(startX.toFixed(2) * this._screenScale),
+                parseFloat(startY.toFixed(2) * this._screenScale),
+                parseFloat(width),
+                parseFloat(height),
+            ]
+        );
+
         UIManager.dispatchViewManagerCommand(
             this._handle,
             UIManager.RNSketchCanvas.Commands.endPath,
