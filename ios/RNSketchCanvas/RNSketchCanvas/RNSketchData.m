@@ -22,6 +22,8 @@
 {
     CGRect _dirty;
     UIBezierPath *_path;
+    bool _isFillRect;
+    CGRect _fillRect;
 }
 
 - (instancetype)initWithId:(int) pathId strokeColor:(UIColor*) strokeColor strokeWidth:(int) strokeWidth {
@@ -110,6 +112,9 @@
 - (void)fillRect:(CGRect) rect InContext:(CGContextRef) context {
     CGContextSetFillColorWithColor(context, [_strokeColor CGColor]);
     CGContextFillRect(context, rect);
+
+    _isFillRect = true;
+    _fillRect = rect;
 }
 
 - (void)drawLastPointInContext:(CGContextRef)context {
@@ -120,7 +125,14 @@
     
     [self drawInContext:context pointIndex:pointsCount - 1];
 }
+
 - (void)drawInContext:(CGContextRef)context {
+    if (_isFillRect) {
+        [self fillRect: _fillRect InContext: context];
+
+        return;
+    }
+
     if (_isTranslucent) {
         CGContextSetLineWidth(context, _strokeWidth);
         CGContextSetLineCap(context, kCGLineCapRound);
