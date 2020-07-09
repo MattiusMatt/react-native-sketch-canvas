@@ -387,8 +387,8 @@ class SketchCanvas extends React.Component {
             [
                 parseFloat(startX.toFixed(2) * this._screenScale),
                 parseFloat(startY.toFixed(2) * this._screenScale),
-                parseFloat(width),
-                parseFloat(height),
+                parseFloat(width * this._screenScale),
+                parseFloat(height * this._screenScale),
             ]
         );
 

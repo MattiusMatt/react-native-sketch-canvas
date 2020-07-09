@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
@@ -192,6 +193,12 @@ public class SketchCanvas extends View {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
         invalidateCanvas(true);
+    }
+
+    public void fillRect(float x, float y, float width, float height) {
+        mCurrentPath.fillRect(mDrawingCanvas, new RectF(x, y, x + width, y + height));
+
+        invalidate(new Rect((int)x, (int)y, (int)(x + width), (int)(y + height)));
     }
 
     public void addPoint(float x, float y) {

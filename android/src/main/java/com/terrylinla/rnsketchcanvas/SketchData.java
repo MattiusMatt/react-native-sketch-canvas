@@ -21,6 +21,8 @@ public class SketchData {
     private Paint mPaint;
     private Path mPath;
     private RectF mDirty = null;
+    private boolean mIsFillRect = false;
+    private RectF mFillRect = null;
 
     public static PointF midPoint(PointF p1, PointF p2) {
         return new PointF((p1.x + p2.x) * 0.5f, (p1.y + p2.y) * 0.5f);
@@ -105,6 +107,13 @@ public class SketchData {
         return integralRect;
     }
 
+    public void fillRect(Canvas canvas, RectF rect) {
+        canvas.drawRect(rect, getFillPaint());
+
+        mIsFillRect = true;
+        mFillRect = rect;
+    }
+
     public void drawLastPoint(Canvas canvas) {
         int pointsCount = points.size();
         if (pointsCount < 1) {
@@ -115,6 +124,12 @@ public class SketchData {
     }
 
     public void draw(Canvas canvas) {
+        if (mIsFillRect) {
+            fillRect(canvas, mFillRect);
+
+            return;
+        }
+
         if (this.isTranslucent) {
             canvas.drawPath(mPath, getPaint());
         } else {
@@ -138,6 +153,16 @@ public class SketchData {
             mPaint.setAntiAlias(true);
             mPaint.setXfermode(new PorterDuffXfermode(isErase ? PorterDuff.Mode.CLEAR : PorterDuff.Mode.SRC_OVER));
         }
+        return mPaint;
+    }
+
+    private Paint getFillPaint() {
+        if (mPaint == null) {
+            mPaint = new Paint();
+            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setColor(strokeColor);
+        }
+
         return mPaint;
     }
 
