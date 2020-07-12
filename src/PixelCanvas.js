@@ -118,9 +118,6 @@ export default (props: React.PropsWithChildren<Props>) => {
         onPanResponderMove: (event, gestureState) => {
             onMove(event, gestureState);
         },
-        onPanResponderRelease: (event, gestureState) => {
-            console.log("up");
-        },
     });
 
     return (

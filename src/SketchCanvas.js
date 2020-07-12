@@ -398,6 +398,8 @@ class SketchCanvas extends React.Component {
             []
         );
 
+        this._path.data.push(`F:${startX},${startY}`);
+
         this._paths.push({
             path: this._path,
             size: 1,
